@@ -2,6 +2,8 @@
 #include <vector>
 // F5 : 프로그램 실행
 
+extern void PlayerClassMain();
+
 using namespace std;
 
 // 알고리즘 : 문제를 푸는 방법
@@ -42,8 +44,20 @@ void PlayerAttackMonsterMain() {
 	cout << "플레이어의 체력 : " << nPlayerHealth << endl;
 	cout << "플레이어의 공격력 : " << nPlayerAttack << endl;
 
-	while (nMonsterHealth >= 0 || nPlayerHealth >= 0)
+	while (nPlayerHealth > 0 && nMonsterHealth > 0)
 	{
+		if (nPlayerHealth <= 0)
+		{
+			cout << "플레이어 사망!" << endl;
+			break;
+		}
+
+		if (nMonsterHealth <= 0)
+		{
+			cout << "몬스터 사망!" << endl;
+			break;
+		}
+
 		// 크리티컬 발생
 		int nRandom = rand() % 4;
 		cout << "Random: " << nRandom << endl;
@@ -60,8 +74,38 @@ void PlayerAttackMonsterMain() {
 
 		cout << "몬스터의 체력 : " << nMonsterHealth << endl;
 		cout << "플레이어의 체력 : " << nPlayerHealth << endl;
+
+		if (nMonsterHealth == 0)
+		{
+			cout << "몬스터 사망!" << endl;
+			break;
+		}
+
+		
 	}
 	
+}
+
+// 몬스터 슬라임, 스켈레톤, 좀비, 드래곤 을 리스트에 저장하고, 각 인덱스에 접근하여 리스트에 있는 모든값을 출력한다.
+// 데이터 : 리스트 -> 배열,동적배열(std:vector)-> string
+// 알고리즘 : 벡터의 0번째 값과 3번째 값을 출력하고, 벡터의 0번부터 하나씩 순서대로 출력한다.
+void MonsterListMain()
+{
+	vector<string> listMonster;
+	listMonster.push_back("슬라임");
+	listMonster.push_back("스켈레톤");
+	listMonster.push_back("좀비");
+	listMonster.push_back("드래곤");
+
+	cout << "listMonster[0] : " << listMonster[0] << endl;
+	cout << "listMonster[1] : " << listMonster[1] << endl;
+
+	for (int i = 0; i < listMonster.size(); i++)
+	{
+		//cout << i << ":" << listMonster[i] << ", ";
+		printf("%d:%s, ", i, listMonster[i]);
+	}
+	cout << endl;
 }
 
 // 가고싶은 장소를 입력하면 해당 장소에 도착했다는 메시지를 띄운다
@@ -89,6 +133,8 @@ void CPPStageMain()
 
 int main() {
 	srand(static_cast<unsigned int>(time(NULL)));
-	PlayerAttackMonsterMain();
+	//PlayerAttackMonsterMain();
+	//MonsterListMain();
+	PlayerClassMain();
 	return 0;
 }

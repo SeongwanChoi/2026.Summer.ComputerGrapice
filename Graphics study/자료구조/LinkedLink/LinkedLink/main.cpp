@@ -51,19 +51,19 @@ void main()
 
 	PrintLinkedList(pBegin);
 
-	SNode* pFind = FindNodeData(pBegin, 40);
-	if (pFind != NULL)
-		printf("Find:%d\n", pFind->nData);
+	//SNode* pFind = FindNodeData(pBegin, 40);
+	//if (pFind != NULL)
+	//	printf("Find:%d\n", pFind->nData);
 
-	pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
+	//pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
 
-	PrintLinkedList(pBegin);
+	//PrintLinkedList(pBegin);
 
-	DeleteNodeData(pBegin, 60);//노드 삭제
+	//DeleteNodeData(pBegin, 60);//노드 삭제
 
-	PrintLinkedList(pBegin);
+	//PrintLinkedList(pBegin);
 
-	DeleteLinkedList(pBegin); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
+	//DeleteLinkedList(pBegin); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
 }
 
 //여기서 부터 기능을 구현한다.
@@ -138,7 +138,7 @@ void InputAdd()
 	//메모리용량이 허용하는 한 추가가 된다.
 	while (nData != -1)
 	{
-		scanf("%d", &nData);
+		scanf_s("%d", &nData);
 		pNode = CreateNode(pNode, nData);
 
 		if (pNode == NULL)
