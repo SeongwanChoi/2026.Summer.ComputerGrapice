@@ -75,6 +75,11 @@ SNode* CreateNode(SNode* pNode, int data)
 	pTemp = new SNode();
 	pTemp->nData = data;
 
+	pTemp->pNext = NULL;
+
+	if (pNode != NULL)
+		pNode->pNext = pTemp;
+
 	return  pTemp;
 }
 
