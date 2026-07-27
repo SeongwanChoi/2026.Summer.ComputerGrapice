@@ -3,18 +3,44 @@
 
 using namespace std;
 
+// °æÇèÄ¡ È¹µæ ¼ö´Ü
+// ¸ó½ºÅÍ Ã³Ä¡
+// È¹µæ·® : 
 class CPlayer
 {
 	string m_strName;
 	string m_strLocation;
 	int m_nHP;
+	int m_nMaxHP;
 	int m_nAtk;
+
+	int m_nLv;
+	int m_nExp;
 public:
-	CPlayer(string name, int hp, int atk)
+	CPlayer(string name, int hp, int atk, int exp)
 	{
 		m_strName = name;
 		m_nHP = hp;
+		m_nMaxHP = hp;
 		m_nAtk = atk;
+		m_nLv = 1;
+		m_nExp = exp;
+	}
+
+	void LvUp()
+	{
+		if (m_nExp >= 100)
+		{
+			m_nExp -= 100;
+			m_nLv++;
+			m_nAtk += 5;
+			m_nHP += 10;
+		}
+	}
+
+	void stealExp(int exp)
+	{
+		m_nExp += exp;
 	}
 
 	void Attack(CPlayer& target)
@@ -32,6 +58,8 @@ public:
 		cout << "Name:" << m_strName << endl;
 		cout << "HP:" << m_nHP << endl;
 		cout << "Atk:" << m_nAtk << endl;
+		cout << "Lv:" << m_nLv << endl;
+		cout << "Exp:" << m_nExp << endl;
 	}
 
 	void setName(string name) { m_strName = name; }
@@ -39,7 +67,7 @@ public:
 
 void PlayerClassMain()
 {
-	CPlayer cPlayer("Player", 100, 10);
+	CPlayer cPlayer("Player", 100, 10, 0);
 	CPlayer cMonster("Monster", 100, 10);
 
 	cPlayer.Display();
@@ -67,7 +95,7 @@ void PlayerClassMain()
 	cout << "Game Over !!!" << endl;
 }
 
-void PlayerBattileMain(CPlayer cPlayer, int Stage)
+void PlayerBattleMain(CPlayer& cPlayer, int Stage)
 {
 	cPlayer.Display();
 	CPlayer cMonster("", 100, 10);
@@ -106,8 +134,12 @@ void PlayerBattileMain(CPlayer cPlayer, int Stage)
 			cMonster.Attack(cPlayer);
 			cPlayer.Display();
 		}
-		else
+		else 
+		{
 			cout << "Monster is Dead!" << endl;
+			cPlayer.stealExp(cMonster.getExp());
+		}
+			
 	}
 
 	cout << "Game Over !!!" << endl;
@@ -117,6 +149,6 @@ void PlayerGameMain(int stage)
 {
 	CPlayer cPlayer("Player", 100, 10);
 	cPlayer.Display();
-	
-	PlayerBattileMain(cPlayer, stage);
+
+	PlayerBattleMain(cPlayer, stage);
 }
