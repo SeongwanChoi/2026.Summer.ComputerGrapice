@@ -8,9 +8,11 @@
 
 
 #include <stdio.h>
+#include <iostream>
 #include <stdlib.h> //메모리 동적할당 헤더
 #include <crtdbg.h> //메모리 누수 탐지 헤더
 //#include  "linkedlistClass.h"
+using namespace std;
 
 struct SNode {
 	int nData;
@@ -51,19 +53,19 @@ void main()
 
 	PrintLinkedList(pBegin);
 
-	//SNode* pFind = FindNodeData(pBegin, 40);
-	//if (pFind != NULL)
-	//	printf("Find:%d\n", pFind->nData);
+	SNode* pFind = FindNodeData(pBegin, 40);
+	if (pFind != NULL)
+		printf("Find:%d\n", pFind->nData);
 
-	//pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
+	pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
 
-	//PrintLinkedList(pBegin);
+	PrintLinkedList(pBegin);
 
-	//DeleteNodeData(pBegin, 60);//노드 삭제
+	DeleteNodeData(pBegin, 60);//노드 삭제
 
-	//PrintLinkedList(pBegin);
+	PrintLinkedList(pBegin);
 
-	//DeleteLinkedList(pBegin); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
+	DeleteLinkedList(pBegin); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
 }
 
 //여기서 부터 기능을 구현한다.
@@ -87,6 +89,17 @@ SNode* FindNodeData(SNode* pStart, int data)
 {
 	SNode* pNode = pStart;
 
+	while (pNode)
+	{
+		if (pNode->nData == data)
+			break;
+		else
+			pNode = pNode->pNext;
+
+		if (pNode == NULL)
+			break;
+	}
+
 	return pNode;
 }
 
@@ -96,6 +109,15 @@ SNode* InsertNodeData(SNode* pStart, int data, int insert)
 	SNode* pInsert = NULL;
 
 	pNode = FindNodeData(pStart, data);
+	pInsert = new SNode();
+	pInsert->nData = insert;
+
+
+	if (pNode != NULL)
+	{
+		pInsert->pNext = pNode->pNext;
+		pNode->pNext = pInsert;
+	}
 
 	return pNode;
 }
@@ -105,7 +127,19 @@ void DeleteNodeData(SNode* pStart, int del)
 	SNode* pPre = NULL;
 	SNode* pNode = pStart;
 
+	pPre = FindNodeData(pNode, del);
 
+	while (pNode)
+	{
+		if (pNode->pNext == pPre)
+		{
+			pNode->pNext = pPre->pNext;
+			delete pPre;
+			break;
+		}
+		else
+			pNode = pNode->pNext;
+	}
 }
 
 void PrintLinkedList(SNode* pStart)
@@ -127,6 +161,13 @@ void DeleteLinkedList(SNode* pStart)
 {
 	SNode* pNode = pStart;
 	SNode* pDel = NULL;
+
+	while (pNode)
+	{
+		pDel = pNode;
+		pNode = pNode->pNext;
+		delete pDel;
+	}
 }
 
 void InputAdd()
