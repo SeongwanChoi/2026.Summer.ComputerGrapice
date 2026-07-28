@@ -27,7 +27,7 @@ SNode* InsertNodeData(SNode* pStart, int data, int insert); //해당 데이터를 가진
 void DeleteNodeData(SNode* pStart, int del); //해당데이터를 가진 노드를 삭제한다.
 void PrintLinkedList(SNode* pStart); //노드를 순회하며 끝날때까지 출력한다.
 void DeleteLinkedList(SNode* pStart); //노드를 순회하며 모든데이터를 삭제한다.
-void ReverseLinkedList(SNode* pStart); //
+void ReverseLinkedList(SNode*& pStart); //연결리스트를 뒤집는다.
 
 //연결리스트 동적으로 입력받기.(동적할당 설명용)
 void InputAdd();
@@ -45,47 +45,51 @@ void main()
 	SNode* pEnd = NULL;
 
 	//노드 추가 테스트
-	pEnd = CreateNode2(pBegin, pEnd, 10);
+	pEnd = CreateNode(pEnd, 10);
 	pBegin = pEnd; //마지막 노드를 알아야 검색이 가능하므로 저장해둔다.
 
-	pEnd = CreateNode2(pBegin, pEnd, 20);
-	pEnd = CreateNode2(pBegin, pEnd, 30);
-	pEnd = CreateNode2(pBegin, pEnd, 40);
-	pEnd = CreateNode2(pBegin, pEnd, 50);
+	pEnd = CreateNode(pEnd, 20);
+	pEnd = CreateNode(pEnd, 30);
+	pEnd = CreateNode(pEnd, 40);
+	pEnd = CreateNode(pEnd, 50);
 
 	PrintLinkedList(pBegin);
 
-	SNode* pFind = FindNodeData(pBegin, 40);
+	/*SNode* pFind = FindNodeData(pBegin, 40);
 	if (pFind != NULL)
-		printf("Find:%d\n", pFind->nData);
+		printf("Find:%d\n", pFind->nData);*/
 
-	pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
+	//pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
+
+	//PrintLinkedList(pBegin);
+
+	//DeleteNodeData(pBegin, 50);//노드 삭제
+
+	//PrintLinkedList(pBegin);
+
+	ReverseLinkedList(pBegin);
 
 	PrintLinkedList(pBegin);
 
-	DeleteNodeData(pBegin, 50);//노드 삭제
-
-	PrintLinkedList(pBegin);
-
-	DeleteLinkedList(pBegin); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
+	//DeleteLinkedList(pBegin); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
 }
 
 //여기서 부터 기능을 구현한다.
 //기존코드는 손대지말고, 추가만 하여 현 프로그램 정상 작동하도록할것.
-//SNode* CreateNode(SNode* pNode, int data)
-//{
-//	SNode* pTemp = NULL;
-//
-//	pTemp = new SNode();
-//	pTemp->nData = data;
-//
-//	pTemp->pNext = NULL;
-//
-//	if (pNode != NULL)
-//		pNode->pNext = pTemp;
-//
-//	return  pTemp;
-//}
+SNode* CreateNode(SNode* pNode, int data)
+{
+	SNode* pTemp = NULL;
+
+	pTemp = new SNode();
+	pTemp->nData = data;
+
+	pTemp->pNext = NULL;
+
+	if (pNode != NULL)
+		pNode->pNext = pTemp;
+
+	return  pTemp;
+}
 
 SNode* CreateNode2(SNode* pStart, SNode* pNode, int data)
 {
@@ -190,6 +194,28 @@ void DeleteLinkedList(SNode* pStart)
 		pNode = pNode->pNext;
 		delete pDel;
 	}
+}
+
+void ReverseLinkedList(SNode*& pStart)
+{
+	SNode* pNode = pStart;
+	SNode* pNx = NULL;
+	SNode* pChange = NULL;
+
+	while (pNode)
+	{
+		pNx = pNode->pNext;
+
+		pNode->pNext = pChange;
+		pChange = pNode;
+
+		pNode = pNx;
+
+		if (pNode == NULL)
+			break;
+	}
+
+	pStart = pChange;
 }
 
 //void InputAdd()
