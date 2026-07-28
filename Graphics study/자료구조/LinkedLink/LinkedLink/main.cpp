@@ -16,10 +16,12 @@ using namespace std;
 
 struct SNode {
 	int nData;
+	SNode* pFront;
 	SNode* pNext;
 };
 
 SNode* CreateNode(SNode* pNode, int data); //노드를 생성하여 리턴한다.
+SNode* CreateNode2(SNode* pStart, SNode* pNode, int data); //노드를 생성하여 리턴한다.
 SNode* FindNodeData(SNode* pStart, int data); //해당 데이터를 가진 노드를 찾는다.
 SNode* InsertNodeData(SNode* pStart, int data, int insert); //해당 데이터를 가진 노드 뒤에 노드를 추가한다.
 void DeleteNodeData(SNode* pStart, int del); //해당데이터를 가진 노드를 삭제한다.
@@ -43,13 +45,13 @@ void main()
 	SNode* pEnd = NULL;
 
 	//노드 추가 테스트
-	pEnd = CreateNode(pEnd, 10);
+	pEnd = CreateNode2(pBegin, pEnd, 10);
 	pBegin = pEnd; //마지막 노드를 알아야 검색이 가능하므로 저장해둔다.
 
-	pEnd = CreateNode(pEnd, 20);
-	pEnd = CreateNode(pEnd, 30);
-	pEnd = CreateNode(pEnd, 40);
-	pEnd = CreateNode(pEnd, 50);
+	pEnd = CreateNode2(pBegin, pEnd, 20);
+	pEnd = CreateNode2(pBegin, pEnd, 30);
+	pEnd = CreateNode2(pBegin, pEnd, 40);
+	pEnd = CreateNode2(pBegin, pEnd, 50);
 
 	PrintLinkedList(pBegin);
 
@@ -61,7 +63,7 @@ void main()
 
 	PrintLinkedList(pBegin);
 
-	DeleteNodeData(pBegin, 60);//노드 삭제
+	DeleteNodeData(pBegin, 50);//노드 삭제
 
 	PrintLinkedList(pBegin);
 
@@ -70,19 +72,35 @@ void main()
 
 //여기서 부터 기능을 구현한다.
 //기존코드는 손대지말고, 추가만 하여 현 프로그램 정상 작동하도록할것.
-SNode* CreateNode(SNode* pNode, int data)
+//SNode* CreateNode(SNode* pNode, int data)
+//{
+//	SNode* pTemp = NULL;
+//
+//	pTemp = new SNode();
+//	pTemp->nData = data;
+//
+//	pTemp->pNext = NULL;
+//
+//	if (pNode != NULL)
+//		pNode->pNext = pTemp;
+//
+//	return  pTemp;
+//}
+
+SNode* CreateNode2(SNode* pStart, SNode* pNode, int data)
 {
 	SNode* pTemp = NULL;
 
 	pTemp = new SNode();
 	pTemp->nData = data;
 
-	pTemp->pNext = NULL;
+	pTemp->pFront = pNode;
+	pTemp->pNext = pStart;
 
 	if (pNode != NULL)
 		pNode->pNext = pTemp;
 
-	return  pTemp;
+	return  pTemp;;
 }
 
 SNode* FindNodeData(SNode* pStart, int data)
@@ -153,6 +171,10 @@ void PrintLinkedList(SNode* pStart)
 
 		if (pNode != NULL)
 			printf(",");
+
+		/*if (pNode == pStart)
+			break;*/
+
 	}
 	printf("\n");
 }
@@ -170,33 +192,33 @@ void DeleteLinkedList(SNode* pStart)
 	}
 }
 
-void InputAdd()
-{
-	SNode* pStart = NULL;
-	SNode* pNode = NULL;
-	int nData = 0;
-
-	//동적할당을 하면 프로그램이 사용자에 의해서 사용되는 메모리가 결정된다.
-	//쉽게말해서, 컴파일단계에서 100개를 만들고 쓴다면, 
-	//사용하지않더라도 100개의 메모리를 사용할수밖에없다.
-	//그리고, 100개 이상의 메모리도 사용할수없다.
-	//그러나, 동적할당을 하면 사용자가 추가한 메모리만큼만 메모리가 사용되고 
-	//메모리용량이 허용하는 한 추가가 된다.
-	while (nData != -1)
-	{
-		scanf_s("%d", &nData);
-		pNode = CreateNode(pNode, nData);
-
-		if (pNode == NULL)
-		{
-			printf("더 이상 사용할수 있는 메모리가 없습니다!");
-		}
-
-		if (pStart == NULL)
-			pStart = pNode;
-
-		PrintLinkedList(pStart);
-	}
-
-	DeleteLinkedList(pStart); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
-}
+//void InputAdd()
+//{
+//	SNode* pStart = NULL;
+//	SNode* pNode = NULL;
+//	int nData = 0;
+//
+//	//동적할당을 하면 프로그램이 사용자에 의해서 사용되는 메모리가 결정된다.
+//	//쉽게말해서, 컴파일단계에서 100개를 만들고 쓴다면, 
+//	//사용하지않더라도 100개의 메모리를 사용할수밖에없다.
+//	//그리고, 100개 이상의 메모리도 사용할수없다.
+//	//그러나, 동적할당을 하면 사용자가 추가한 메모리만큼만 메모리가 사용되고 
+//	//메모리용량이 허용하는 한 추가가 된다.
+//	while (nData != -1)
+//	{
+//		scanf_s("%d", &nData);
+//		pNode = CreateNode(pNode, nData);
+//
+//		if (pNode == NULL)
+//		{
+//			printf("더 이상 사용할수 있는 메모리가 없습니다!");
+//		}
+//
+//		if (pStart == NULL)
+//			pStart = pNode;
+//
+//		PrintLinkedList(pStart);
+//	}
+//
+//	DeleteLinkedList(pStart); //모든노드삭제 - 이 함수를 호출하지않을시 메모리가 누수됨.
+//}
