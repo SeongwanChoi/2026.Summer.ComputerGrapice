@@ -262,7 +262,7 @@ void BattleMain()
 }
 
 extern void PlayerClassMain();
-extern void PlayerGameMain(int stage);
+extern void PlayerGameMain();
 
 int main()
 {
@@ -278,8 +278,8 @@ int main()
 	//MonsterListMain();
 
 	//PlayerClassMain();
-	int nStage = CPPStageMain2();
-	PlayerGameMain(nStage);
+	//int nStage = CPPStageMain2();
+	PlayerGameMain();
 	
 	return 0;
 }
