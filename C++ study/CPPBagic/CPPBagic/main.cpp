@@ -15,7 +15,7 @@ using namespace std;
 //데이터: 몬스터의 체력, 플레이어의 공격력
 //알고리즘: 몬스터의 체력 - 플레이어의 공격력
 //함수: 어떤기능을 묶어서 재사용 하도록 만드는 것
-void PlayerAttackMonsterMain()
+void PlayerAttackMonsterMain() 
 {//구문
 	int nMonsterHP = 100; // 몬스터의 체력
 	int nPlayerAttack = 10; // 플레이어의 공격력
@@ -41,20 +41,20 @@ void PlayerAttackMonsterMain()
 //.....
 void PlayerCritcalAttackMonsterMain()
 {
-	int nMonsterHP = 100;
-	int nPlayerAttack = 10;
+	int nMonsterHP = 100; 
+	int nPlayerAttack = 10; 
 
-	cout << "몬스터의 체력: " << nMonsterHP << endl;
+	cout << "몬스터의 체력: " << nMonsterHP << endl; 
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 
 	//크리티컬어택발생
-
+	
 	int nRandom = rand() % 4; //0~99까지 랜덤숫자
 	cout << "Random:" << nRandom << endl;
 	if (nRandom == 1)
 	{
 		cout << "크리키컬히트!" << endl;
-		nMonsterHP = nMonsterHP - (nPlayerAttack * 2);
+		nMonsterHP = nMonsterHP - (nPlayerAttack*2);
 	}
 	else
 		nMonsterHP = nMonsterHP - nPlayerAttack;
@@ -137,7 +137,7 @@ enum PLACE_TYPE
 	PLACE_FIELD,    // 필드 (3번)
 	PLACE_MAX       // 최대 개수 체크용
 };
-int CPPStageMain2()
+void CPPStageMain2()
 {
 	// 2. 출력용 string 배열 선언 (인덱스 맞추기를 위해 0번은 빈 값 또는 안내용으로 둠)
 	// 예: 인덱스 1 = 마을, 2 = 상점, 3 = 필드
@@ -166,8 +166,6 @@ int CPPStageMain2()
 		cout << "❌ 잘못된 번호입니다. 1부터 3까지의 숫자를 입력해주세요." << endl;
 		break;
 	}
-
-	return nChoice;
 }
 //죽었다: 전투가 끝났다? 체력이 0 되었다.
 //알고리즘을 만들때 잘모르겠으면 무한루프를 돌리고, 조건을 찾아서 브레이크하면쉽게 찾을수있다.
@@ -179,7 +177,7 @@ void PlayerAttackMonsterWhileMain()
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 
 	//while (true)
-	while (nMonsterHP != 0)
+	while(nMonsterHP != 0)
 	{
 		nMonsterHP = nMonsterHP - nPlayerAttack;
 		cout << "몬스터의 체력: " << nMonsterHP << endl;
@@ -205,7 +203,7 @@ void MonsterListMain()
 
 	for (int i = 0; i < listMonster.size(); i++)
 	{
-		cout << i << ":" << listMonster[i] << ",";
+		cout << i <<":" <<listMonster[i] << ",";
 		//printf("%d:%s,", i, listMonster[i].c_str());
 	}
 	cout << endl;
@@ -224,7 +222,7 @@ void BattleMain()
 	cout << "플레이어의 체력: " << nPlayerAttack << endl; //문장
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 
-
+	
 	int nMonsterAttack = 20;
 	int nMonsterHP = 40; // 몬스터의 체력
 	cout << "몬스터의 체력: " << nMonsterHP << endl; //문장
@@ -257,14 +255,14 @@ void BattleMain()
 			nPlayerHP = nPlayerHP - nMonsterAttack;
 			cout << "플레이어의 체력: " << nPlayerAttack << endl; //문장
 			cout << "플레이어의 공격력: " << nPlayerAttack << endl;
-		}
+		}	
 	}
 }
 
-extern void PlayerClassMain();
+//extern void PlayerClassMain();//함수의 선언
 extern void PlayerGameMain();
 
-int main()
+int main() 
 {
 	//cout << "Hello, World!" << endl;
 	srand(static_cast<unsigned int>(time(NULL)));
@@ -278,8 +276,6 @@ int main()
 	//MonsterListMain();
 
 	//PlayerClassMain();
-	//int nStage = CPPStageMain2();
 	PlayerGameMain();
-	
 	return 0;
 }
