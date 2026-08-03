@@ -20,6 +20,7 @@ CItem::CItem(string name, EITEMKIND kind, int value)
 	m_nValue = value;
 }
 
+
 void CItem::Use(CPlayer& player)
 {
 	switch (m_eItemKind)
@@ -57,6 +58,11 @@ CPlayer::CPlayer(string name, int hp, int def, int atk, int exp, int money)
 	m_nExp = exp;
 	m_nLv = 1;
 	m_nMoney = money;
+}
+
+CPlayer::~CPlayer()
+{
+	cout << "[¼Ò¸êÀÚ È£Ãâ] " << m_strName << " °´Ã¼°¡ ¼Ò¸êÇÕ´Ï´Ù." << endl;
 }
 
 void CPlayer::RecoceryHP(int val)

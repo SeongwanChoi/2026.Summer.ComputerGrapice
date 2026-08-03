@@ -42,6 +42,7 @@ public:
 	int GetMoney() { return m_nMoney; }
 
 	CPlayer(string name, int hp, int def, int atk, int exp, int money = 0);
+	~CPlayer();
 
 	void RecoceryHP(int val);
 	void RecoceryMP(int val);

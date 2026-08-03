@@ -14,7 +14,8 @@ using namespace std;
 //1.인덱스로 원소접근이 가능하다.
 //2.각 자료는 포인터연산(인덱스)을 통한 순차/랜덤접근이 가능하다.
 //3.배열의 크기를 런타임중에 변경가능하다.
-void VectorMain()
+// container : 화물의 짐을 담는 물건을 뜻하는 말, 컴퓨터에서 담아야할 물건은? 데이터
+void VectorMain() // 동적 배열
 {
 	vector<int> container(1);//컨테이너생성시 크기를 지정가능하다.
 	container[0] = 10;
@@ -23,12 +24,15 @@ void VectorMain()
 		cout << "[" << i << "]" << container[i] << ",";
 	cout << endl;
 	container.resize(3); //배열의 크기를 지정한다.
+	container[1] = 20;
+	container[2] = 30;
 	cout << "Print:";
 	for (int i = 0; i < container.size(); i++)
 		cout << "[" << i << "]" << container[i] << ",";
 	cout << endl;
 	//1.추가 2.삽입 3.삭제 4.모두삭제
 	vector<int>::iterator it;
+	container.push_back(40); 
 	cout << "PrintPtr:";
 	for (it = container.begin(); it != container.end(); it++)
 		cout << "[" << &*it << "]" << *it << ",";
@@ -223,13 +227,13 @@ void HashMapMain()
 }
 void main()
 {
-	//VectorMain();
+	VectorMain();
 	//ListMain();
 	//DequeMain();
 	//StackMain();
 	//QueueMain();
 	//PriorytyQueueMain();
 	//MapMain();
-	SetMain();
-	HashMapMain();
+	//SetMain();
+	//HashMapMain();
 }
