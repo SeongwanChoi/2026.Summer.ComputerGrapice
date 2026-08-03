@@ -63,7 +63,7 @@ void main()
 
 	PrintLinkedList(pBegin);
 
-	DeleteNodeData(pBegin, 50);//노드 삭제
+	DeleteNodeData(pBegin, 60);//노드 삭제
 
 	PrintLinkedList(pBegin);
 
