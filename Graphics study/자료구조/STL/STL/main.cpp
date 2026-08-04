@@ -225,9 +225,101 @@ void HashMapMain()
 	cout << mapDic["note"] << endl;
 	
 }
+
+const int MAX = 100;
+bool g_visited[MAX];      // 방문 여부를 기록하는 배열
+vector<int> g_graph[MAX]; // 그래프를 표현하는 인접 리스트
+
+// DFS 함수 정의 (현재 방문한 정점: node)
+void DFS(int node)
+{
+	// 1. 현재 노드를 방문했음으로 표시하고 출력합니다.
+	g_visited[node] = true;
+	cout << node << " ";
+
+	// 2. 현재 노드와 연결된 다른 노드들을 순회합니다.
+	for (size_t i = 0; i < g_graph[node].size(); ++i)
+	{
+		int nextNode = g_graph[node][i];
+
+		// 3. 아직 방문하지 않은 노드라면 재귀적으로 DFS를 호출합니다.
+		if (!g_visited[nextNode])
+		{
+			DFS(nextNode);
+		}
+	}
+}
+
+void DFS_Iterative(int startNode)
+{
+	stack<int> s;
+
+	// 1. 시작 노드를 스택에 넣고 시작합니다.
+	s.push(startNode);
+
+	while (!s.empty())
+	{
+		// 2. 스택의 맨 위에 있는 노드를 꺼냅니다.
+		int currNode = s.top();
+		s.pop();
+
+		// 3. 아직 방문하지 않았다면 방문 처리하고 출력합니다.
+		if (!g_visited[currNode])
+		{
+			g_visited[currNode] = true;
+			cout << currNode << " ";
+
+			// 4. 연결된 인접 노드들을 스택에 넣습니다.
+			// (주의: 재귀 방식과 방문 순서를 똑같이 맞추려면 인접 리스트를 뒤에서부터 스택에 넣어야 합니다)
+			for (int i = g_graph[currNode].size() - 1; i >= 0; --i)
+			{
+				int nextNode = g_graph[currNode][i];
+
+				if (!g_visited[nextNode])
+				{
+					s.push(nextNode);
+				}
+			}
+		}
+	}
+}
+
+void BFS(int startNode)
+{
+	queue<int> q;
+
+	// 1. 시작 노드를 큐에 넣고(push) 방문 처리합니다.
+	q.push(startNode);
+	g_visited[startNode] = true;
+
+	// 2. 큐가 빌 때까지 반복합니다.
+	while (!q.empty())
+	{
+		// 3. 큐의 맨 앞에서 노드를 하나 꺼냅니다. (FIFO: 먼저 들어온 것이 먼저 나감)
+		int currNode = q.front();
+		q.pop();
+
+		cout << currNode << " ";
+
+		// 4. 현재 노드와 연결된 인접 노드들을 순회합니다.
+		for (size_t i = 0; i < g_graph[currNode].size(); ++i)
+		{
+			int nextNode = g_graph[currNode][i];
+
+			// 5. 아직 방문하지 않은 노드라면, 큐에 넣고 즉시 방문 처리합니다.
+			// (참고: BFS는 큐에 '넣을 때' 미리 방문 처리를 해야 중복으로 들어가는 것을 막을 수 있습니다)
+			if (!g_visited[nextNode])
+			{
+				g_visited[nextNode] = true;
+				q.push(nextNode);
+			}
+		}
+	}
+}
+
 void main()
 {
-	VectorMain();
+	//VectorMain();
 	//ListMain();
 	//DequeMain();
 	//StackMain();
@@ -236,4 +328,35 @@ void main()
 	//MapMain();
 	//SetMain();
 	//HashMapMain();
+
+	g_graph[1].push_back(2);
+	g_graph[1].push_back(3);
+
+	// 2번 노드와 4, 5번 노드가 연결됨
+	g_graph[2].push_back(4);
+	g_graph[2].push_back(5);
+
+	// 3번 노드와 6번 노드가 연결됨
+	g_graph[3].push_back(6);
+
+	// (역방향도 추가해 줍니다)
+	g_graph[2].push_back(1);
+	g_graph[3].push_back(1);
+	g_graph[4].push_back(2);
+	g_graph[5].push_back(2);
+	g_graph[6].push_back(3);
+
+	//cout << "DFS 탐색 순서: ";
+	//// 1번 노드부터 DFS 시작
+	//DFS(1);
+	//cout << endl;
+
+	/*cout << "스택 기반 DFS 탐색 순서: ";
+	DFS_Iterative(1);
+	cout << endl;*/
+
+	cout << "BFS 탐색 순서: ";
+	// 1번 노드부터 BFS 시작
+	BFS(1);
+	cout << endl;
 }
