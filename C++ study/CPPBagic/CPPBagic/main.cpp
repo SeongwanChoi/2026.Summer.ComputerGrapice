@@ -1,7 +1,8 @@
 ﻿#include <iostream>//입출력라이브러리
 #include <time.h>
-#include <vector>
 
+#include <vector>
+#include "car.h"
 using namespace std;
 
 //F5: 프로그램 실행
@@ -262,20 +263,15 @@ void BattleMain()
 //extern void PlayerClassMain();//함수의 선언
 extern void PlayerGameMain();
 
+
+
 int main() 
 {
 	//cout << "Hello, World!" << endl;
-	srand(static_cast<unsigned int>(time(NULL)));
-	//PlayerAttackMonsterMain();
-	//PlayerCritcalAttackMonsterMain();
-	//StageMain();
-	//CPPStageMain();
-	//CPPStageMain2();
-	//PlayerAttackMonsterWhileMain();
-	//BattleMain();
-	//MonsterListMain();
+	//srand(static_cast<unsigned int>(time(NULL)));
 
 	//PlayerClassMain();
-	PlayerGameMain();
+	//PlayerGameMain();
+	CarMain();
 	return 0;
 }
