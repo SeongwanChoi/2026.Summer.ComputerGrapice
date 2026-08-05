@@ -33,8 +33,15 @@ public:
 
 	void Accelerator()
 	{
+		// 1. 클래스 내부이기 때문에 m_eGear를 자유롭게 꺼내 쓸 수 있습니다!
 		if (m_eGear == EGEAR::D)
+		{
 			m_fSpeedf++;
+		}
+		else
+		{
+			cout << "기어를 D로 변경해야 엑셀을 밟을 수 있습니다." << endl;
+		}
 	}
 
 	void Break()
@@ -65,16 +72,13 @@ void CarMain()
 {
 	CCar cCar("Black");
 
-	cCar.SetGear(EGEAR::D);
-
-	cCar.Accelerator();
-
-	cCar.Break();
+	cCar.SetGear(EGEAR::N);
 
 	int switch_on = 0;
-	while (switch_on != 4)
+	while (true)
 	{
-		cout << "자동차 조작을 선택하세요: 1. 엑셀, 2. 브레이크, 3. 기어N, 4. 기어D, 5. 기어R, 6. 기어ONE, 7. 기어TOW" << endl;
+		cout << "자동차 조작을 선택하세요." << endl;
+		cout << "1. 엑셀, 2. 브레이크, 3. 기어N, 4. 기어D, 5. 기어R, 6. 기어ONE, 7. 기어TOW, 8. 주행종료" << endl;
 
 		cin >> switch_on;
 
@@ -86,12 +90,43 @@ void CarMain()
 		case 2:
 			cCar.Break();
 			break;
-
+		case 3:
+			cCar.SetGear(EGEAR::N);
+			break;
+		case 4:
+			cCar.SetGear(EGEAR::D);
+			break;
+		case 5:
+			cCar.SetGear(EGEAR::R);
+			break;
+		case 6:
+			cCar.SetGear(EGEAR::ONE);
+			break;
+		case 7:
+			cCar.SetGear(EGEAR::TOW);
+			break;
+		case 8:
+			cCar.SetGear(EGEAR::P);
+			break;
 		default:
 			break;
 		}
 
+
+
 		cCar.Display();
+
+		if (cCar.GetSpeed() == 0)
+		{
+			cout << "자동차가 멈췄습니다." << endl;
+		}
+
+		if (switch_on == 8)
+		{
+			cout << "주행을 종료합니다." << endl;
+			break;
+		}
+
 	}
 	//cCar.Display();
 
