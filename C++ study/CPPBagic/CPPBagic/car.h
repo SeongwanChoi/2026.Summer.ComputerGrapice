@@ -31,6 +31,11 @@ public:
 		m_eGear = gear;
 	}
 
+	float GetSpeed()
+	{
+		return m_fSpeedf;
+	}
+
 	void Accelerator()
 	{
 		// 1. 클래스 내부이기 때문에 m_eGear를 자유롭게 꺼내 쓸 수 있습니다!

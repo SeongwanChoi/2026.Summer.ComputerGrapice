@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "car.h"
+#include "tv.h"
 using namespace std;
 
 //F5: 프로그램 실행
@@ -272,6 +273,7 @@ int main()
 
 	//PlayerClassMain();
 	//PlayerGameMain();
-	CarMain();
+	//CarMain();
+	TvMain();
 	return 0;
 }
