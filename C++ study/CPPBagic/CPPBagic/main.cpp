@@ -4,6 +4,7 @@
 #include <vector>
 #include "car.h"
 #include "tv.h"
+#include "2.4.has-a,is-a_Radio.h"
 using namespace std;
 
 //F5: 프로그램 실행
@@ -274,6 +275,7 @@ int main()
 	//PlayerClassMain();
 	//PlayerGameMain();
 	//CarMain();
-	TvMain();
+	//TvMain();
+	RadioMain();
 	return 0;
 }

@@ -73,6 +73,7 @@ int main()
 	//스레드는 프로그램 내부에서 처리하는 내용을 변경할수 있어야하므로, 
 	//그 프로그램 내의 함수를 호출하여 사용한다.
 	//콜백함수: 프로세스내에서 호출하지않고, 외부에서 호출하도록 하는 함수.
+
 	hThread = (HANDLE)_beginthreadex(NULL, 0,
 		WndProc,
 		(void*)qInput.front(), 0,

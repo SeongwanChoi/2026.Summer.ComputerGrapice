@@ -16,9 +16,14 @@ class CCar
 public:
 	CCar(string color)
 	{
+		cout << "~" << "[" << this << "]" << typeid(*this).name() << ":" << m_strColor << endl;
 		m_strColor = color;
 		m_eGear = EGEAR::P;
 		m_fSpeedf = 0.0f;
+	}
+	~CCar()
+	{
+		cout << "~" << "[" << this << "]" << typeid(*this).name() << ":" << m_strColor << endl;
 	}
 
 	void SetColor(string color)
