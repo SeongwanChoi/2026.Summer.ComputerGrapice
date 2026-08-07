@@ -24,6 +24,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+    AllocConsole();
 
     // TODO: 여기에 코드를 입력합니다.
 
@@ -127,7 +128,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         case WM_CREATE:
         {
-			CreateWindow(TEXT("button"), TEXT("Click me"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 20, 20, 100, 25, hWnd, (HMENU)0, hInst, NULL);
+
+			CreateWindow(TEXT("button"), TEXT("Click me"), 
+                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 
+                20, 20, 100, 25, hWnd, (HMENU)1, hInst, NULL);
 		}
     case WM_COMMAND:
         {
@@ -135,7 +139,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // 메뉴 선택을 구문 분석합니다:
             switch (wmId)
             {
-            case 0:
+            case 1:
                 MessageBox(hWnd, TEXT("First Button Clicked"), TEXT("Button"), MB_OK);
                 break;
             case IDM_ABOUT:

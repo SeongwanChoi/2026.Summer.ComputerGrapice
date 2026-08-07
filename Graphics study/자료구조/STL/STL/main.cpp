@@ -37,6 +37,9 @@ void VectorMain() // 동적 배열
 	for (it = container.begin(); it != container.end(); it++)
 		cout << "[" << &*it << "]" << *it << ",";
 	cout << endl;
+	
+	//cout << "end : " << container.end() << endl;
+
 	container.clear(); //모두삭제
 	cout << "Clear:";
 	for (it = container.begin(); it != container.end(); it++)
@@ -319,7 +322,7 @@ void BFS(int startNode)
 
 void main()
 {
-	//VectorMain();
+	VectorMain();
 	//ListMain();
 	//DequeMain();
 	//StackMain();
@@ -329,34 +332,34 @@ void main()
 	//SetMain();
 	//HashMapMain();
 
-	g_graph[1].push_back(2);
-	g_graph[1].push_back(3);
+	//g_graph[1].push_back(2);
+	//g_graph[1].push_back(3);
 
-	// 2번 노드와 4, 5번 노드가 연결됨
-	g_graph[2].push_back(4);
-	g_graph[2].push_back(5);
+	//// 2번 노드와 4, 5번 노드가 연결됨
+	//g_graph[2].push_back(4);
+	//g_graph[2].push_back(5);
 
-	// 3번 노드와 6번 노드가 연결됨
-	g_graph[3].push_back(6);
+	//// 3번 노드와 6번 노드가 연결됨
+	//g_graph[3].push_back(6);
 
-	// (역방향도 추가해 줍니다)
-	g_graph[2].push_back(1);
-	g_graph[3].push_back(1);
-	g_graph[4].push_back(2);
-	g_graph[5].push_back(2);
-	g_graph[6].push_back(3);
+	//// (역방향도 추가해 줍니다)
+	//g_graph[2].push_back(1);
+	//g_graph[3].push_back(1);
+	//g_graph[4].push_back(2);
+	//g_graph[5].push_back(2);
+	//g_graph[6].push_back(3);
 
-	//cout << "DFS 탐색 순서: ";
-	//// 1번 노드부터 DFS 시작
-	//DFS(1);
+	////cout << "DFS 탐색 순서: ";
+	////// 1번 노드부터 DFS 시작
+	////DFS(1);
+	////cout << endl;
+
+	///*cout << "스택 기반 DFS 탐색 순서: ";
+	//DFS_Iterative(1);
+	//cout << endl;*/
+
+	//cout << "BFS 탐색 순서: ";
+	//// 1번 노드부터 BFS 시작
+	//BFS(1);
 	//cout << endl;
-
-	/*cout << "스택 기반 DFS 탐색 순서: ";
-	DFS_Iterative(1);
-	cout << endl;*/
-
-	cout << "BFS 탐색 순서: ";
-	// 1번 노드부터 BFS 시작
-	BFS(1);
-	cout << endl;
 }
