@@ -23,15 +23,23 @@ bool g_bLoop = true;
 unsigned int WINAPI WndProc(void* arg)
 {
 	cout << "arg:" << arg << endl;
-	int* pData = (int*)arg;
+	queue<int>* pQueue = static_cast<queue<int>*>(arg);
+
+	int nData = 0;
 
 	while (g_bLoop)
 	{
-		switch (*pData)
+		if (!pQueue->empty())
+		{
+			nData = pQueue->front();
+			pQueue->pop();
+		}
+
+		switch (nData)
 		{
 		case CREATE:
 			cout << "초기화" << endl;
-			*pData = COMMOND;
+			nData = COMMOND;
 			break;
 		case COMMOND:
 			cout << "명령을 입력하세요." << endl;
@@ -63,11 +71,11 @@ int main()
 	HANDLE hThread = NULL;
 	DWORD dwThreadID = NULL;
 
-	queue<int*> qInput;
+	queue<int> qInput;
 
 	int nMSG = CREATE;
 	cout << "Msg:" << &nMSG << endl;
-	qInput.push(&nMSG);
+	qInput.push(nMSG);
 	//프로세스: 프로그램의 가장 기본적인 처리를 당담하는 흐름단위(메인루프), 큰흐름단위.
 	//스레드: 프로세스 내부에 처리를 하는 흐름단위(반복문을 동시에 처리가능), 큰흐름 하위의 작은 흐름.
 	//스레드는 프로그램 내부에서 처리하는 내용을 변경할수 있어야하므로, 
@@ -76,17 +84,15 @@ int main()
 
 	hThread = (HANDLE)_beginthreadex(NULL, 0,
 		WndProc,
-		(void*)qInput.front(), 0,
+		(void*)&qInput, 0,
 		(unsigned int*)dwThreadID);
 
 
 	while (g_bLoop)
 	{
 		scanf_s("%d", &nMSG);
-		qInput.push(&nMSG);
+		qInput.push(nMSG);
 	}
-
-	
 
 	return 0;
 }

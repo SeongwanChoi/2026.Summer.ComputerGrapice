@@ -9,10 +9,11 @@ public:
 	{
 		m_bPower = false;
 		m_fVolume = 0;
+		cout << "Spiker 생성" << endl;
 	}
 	~Spiker()
 	{
-
+		cout << "Spiker 소멸" << endl;
 	}
 	void SwitchOn()
 	{
@@ -38,11 +39,11 @@ class Antena
 public:
 	Antena()
 	{
-
+		cout << "Antena 생성" << endl;
 	}
 	~Antena()
 	{
-
+		cout << "Antena 소멸" << endl;
 	}
 	void HertzUp()
 	{
@@ -56,7 +57,15 @@ public:
 //is-a: 상속을 이용하면 코드를 거이 작성하지않고 만들수있다.
 class RadioIsA : public Spiker, public Antena
 {
-
+public:
+	RadioIsA() 
+	{
+		cout << "RadioIsA 생성" << endl;
+	}
+	~RadioIsA()
+	{
+		cout << "RadioIsA 소멸" << endl;
+	}
 };
 //has-a: 각 객체를 감싸는 함수를 만들어한다.
 //만들때 내부의 부품을 더 좋은 부품을 사용할수있다.
@@ -70,6 +79,11 @@ public:
 	{
 		m_pSpiker = spiker;
 		m_pAntena = antena;
+		cout << "RadioHasA 생성" << endl;
+	}
+	~RadioHasA()
+	{
+		cout << "RadioHasA 소멸" << endl;
 	}
 	void SwitchOn()
 	{
