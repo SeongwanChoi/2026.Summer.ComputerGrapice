@@ -19,19 +19,6 @@ Commander::Commander(int re, int ndm, int edm, int vdm, int ar, int sar, int bar
 		Display();
 }
 
-void Commander::Display()
-{
-	cout << "========================" << endl;
-	cout << "자원: " << nResources << endl;
-	cout << "일반 공격력: " << n_Normal_Damage << endl;
-	cout << "폭발 공격력: " << n_Explosion_Damage << endl;
-	cout << "진동 공격력: " << n_Vibration_Damage << endl;
-	cout << "방어력: " << n_Armor << endl;
-	cout << "소형 방어력: " << n_Small_Armor << endl;
-	cout << "대형 방어력: " << n_Big_Armor << endl;
-	cout << "========================" << endl;
-}
-
 void Commander::Command()
 {
 	cout << "========================" << endl;
@@ -55,6 +42,29 @@ void Commander::Upgrade()
 
 }
 
+void Commander::CombatUp()
+{
+
+}
+
+void Commander::Battle()
+{
+
+}
+
+void Commander::Display()
+{
+	cout << "========================" << endl;
+	cout << "자원: " << nResources << endl;
+	cout << "일반 공격력: " << n_Normal_Damage << endl;
+	cout << "폭발 공격력: " << n_Explosion_Damage << endl;
+	cout << "진동 공격력: " << n_Vibration_Damage << endl;
+	cout << "방어력: " << n_Armor << endl;
+	cout << "소형 방어력: " << n_Small_Armor << endl;
+	cout << "대형 방어력: " << n_Big_Armor << endl;
+	cout << "========================" << endl;
+}
+
 void GamePlay()
 {
 	Commander commander;
@@ -70,10 +80,13 @@ void GamePlay()
 				commander.Paming();
 			break;
 			case 2:
+				commander.Upgrade();
 			break;
 			case 3:
+				commander.CombatUp();
 			break;
 			case 4:
+				commander.Battle();
 			break;
 			case 5:
 				commander.Display();
