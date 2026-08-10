@@ -23,9 +23,9 @@ void Commander::Display()
 {
 	cout << "========================" << endl;
 	cout << "자원: " << nResources << endl;
-	cout << "일반 공격 데미지: " << n_Normal_Damage << endl;
-	cout << "폭발 공격 데미지: " << n_Explosion_Damage << endl;
-	cout << "진동 공격 데미지: " << n_Vibration_Damage << endl;
+	cout << "일반 공격력: " << n_Normal_Damage << endl;
+	cout << "폭발 공격력: " << n_Explosion_Damage << endl;
+	cout << "진동 공격력: " << n_Vibration_Damage << endl;
 	cout << "방어력: " << n_Armor << endl;
 	cout << "소형 방어력: " << n_Small_Armor << endl;
 	cout << "대형 방어력: " << n_Big_Armor << endl;
@@ -50,6 +50,11 @@ void Commander::Paming()
 	cout << "현재 자원 : " << nResources << endl;
 }
 
+void Commander::Upgrade()
+{
+
+}
+
 void GamePlay()
 {
 	Commander commander;
@@ -63,6 +68,12 @@ void GamePlay()
 		{
 			case 1:
 				commander.Paming();
+			break;
+			case 2:
+			break;
+			case 3:
+			break;
+			case 4:
 			break;
 			case 5:
 				commander.Display();
