@@ -1,5 +1,4 @@
 #pragma once
-#include <list>
 using namespace std;
 
 class Commander;
@@ -7,8 +6,9 @@ class Commander;
 class Commander
 { 
 	int nResources;	//	자원
+	int n_UP_Resources = 1; // 자원 증가량
 	
-	int n_Normal_Damage;	//  일반 공격 데미지
+	int n_Normal_Damage;	//  기본 공격 데미지
 	int n_Explosion_Damage;	//	폭발 공격 데미지
 	int n_Vibration_Damage;	//	진동 공격 데미지
 
@@ -25,6 +25,6 @@ public:
 	void Command();
 	void Paming();
 	void Upgrade();
-	void CombatUp();
+	void PartyFull();
 	void Battle();
 };

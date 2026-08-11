@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "Commander.h"
 
 
@@ -33,18 +32,81 @@ void Commander::Command()
 void Commander::Paming()
 {
 	cout << "미네랄을 획득했습니다." << endl;
-	nResources += 1;
+	nResources += n_UP_Resources;
 	cout << "현재 자원 : " << nResources << endl;
 }
 
 void Commander::Upgrade()
 {
+	int Upgrade = 0;
+	bool g_bUpgrade = 1;
 
+	while (g_bUpgrade)
+	{
+		cout << "1. 획득 미네랄 + 1 " << endl;
+		cout << "2. 폭발 공격 강화" << endl;
+		cout << "3. 진동 공격 강화" << endl;
+		cout << "4. 장갑 강화" << endl;
+		cout << "5. 소형 장갑 강화" << endl;
+		cout << "6. 대형 장갑 강화" << endl;
+		cout << "7. 나가기" << endl;
+		cin >> Upgrade;
+
+		switch (Upgrade)
+		{
+			case 1:
+				n_UP_Resources++;
+				break;
+			case 2:
+				n_Normal_Damage += 10;
+				n_Explosion_Damage += 10;
+				break;
+			case 3:
+				n_Normal_Damage += 10;
+				n_Vibration_Damage += 10;
+				break;
+			case 4:
+				n_Armor += 10;
+				break;
+			case 5:
+				n_Small_Armor += 10;
+				break;
+			case 6:
+				n_Big_Armor += 10;
+				break;
+			case 7:
+				g_bUpgrade = 0;
+				break;
+			default:
+				cout << "다시 입력해주세요. " << endl;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				break;
+		}
+	}
+	
 }
 
-void Commander::CombatUp()
+void Commander::PartyFull()
 {
+	int Combat = 0;
 
+	
+	
+
+	while (true)
+	{
+		switch (Combat)
+		{
+		case 1:
+			break;
+		default:
+			cout << "다시 입력해주세요. " << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			break;
+		}
+	}
 }
 
 void Commander::Battle()
@@ -83,7 +145,7 @@ void GamePlay()
 				commander.Upgrade();
 			break;
 			case 3:
-				commander.CombatUp();
+				commander.PartyFull();
 			break;
 			case 4:
 				commander.Battle();
