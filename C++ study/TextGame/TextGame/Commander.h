@@ -1,4 +1,7 @@
 #pragma once
+#include <thread>
+#include <mutex>
+
 using namespace std;
 
 class Commander;
@@ -16,8 +19,13 @@ class Commander
 	int n_Small_Armor;	//  소형 방어력
 	int n_Big_Armor;	//	대형 방어력
 
-	int n_Combat_Power;	//	전투력
 	
+	bool m_bAutoMining; // 자동 자원 채취 트리거
+	thread m_MiningThread;
+	mutex m_ResourceMutex; // 자원 동기화용 뮤텍스
+
+	void AutoMiningWorker();
+
 public:
 
 	Commander(int re = 0, int ndm = 0, int edm = 0, int vdm = 0, int ar = 0, int sar = 0, int bar = 0, int cp = 0);
@@ -27,4 +35,5 @@ public:
 	void Upgrade();
 	void PartyFull();
 	void Battle();
+
 };

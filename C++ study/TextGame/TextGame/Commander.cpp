@@ -14,8 +14,30 @@ Commander::Commander(int re, int ndm, int edm, int vdm, int ar, int sar, int bar
 		n_Small_Armor = sar;
 		n_Big_Armor = bar;
 		n_Combat_Power = cp;
+
+		m_bAutoMining = true;
+		srand(static_cast<unsigned int>(time(nullptr)));
+
+		// 백그라운드 미네랄 채취 스레드 시작 (3초마다 미네랄 증가)
+		m_MiningThread = thread(&Commander::AutoMiningWorker, this);
+
 		cout << "반갑습니다 사령관님, 숫자를 눌러 명령을 내려주세요" << endl;
 		Display();
+}
+
+Commander::~Commander()
+{
+	// 프로그램 종료 시 스레드 안전하게 종료 대기
+	m_bAutoMining = false;
+	if (m_MiningThread.joinable())
+	{
+		m_MiningThread.join();
+	}
+}
+
+void Commander::AutoMiningWorker()
+{
+
 }
 
 void Commander::Command()
@@ -90,9 +112,6 @@ void Commander::Upgrade()
 void Commander::PartyFull()
 {
 	int Combat = 0;
-
-	
-	
 
 	while (true)
 	{
