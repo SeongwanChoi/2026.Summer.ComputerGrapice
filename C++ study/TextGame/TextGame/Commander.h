@@ -29,6 +29,8 @@ class Commander
 public:
 
 	Commander(int re = 0, int ndm = 0, int edm = 0, int vdm = 0, int ar = 0, int sar = 0, int bar = 0, int cp = 0);
+	~Commander();
+
 	void Display();
 	void Command();
 	void Paming();

@@ -1,6 +1,7 @@
 #include <iostream>
+#include <thread>
+#include <mutex>
 #include "Commander.h"
-
 
 using namespace std;
 
@@ -13,7 +14,6 @@ Commander::Commander(int re, int ndm, int edm, int vdm, int ar, int sar, int bar
 		n_Armor = ar;
 		n_Small_Armor = sar;
 		n_Big_Armor = bar;
-		n_Combat_Power = cp;
 
 		m_bAutoMining = true;
 		srand(static_cast<unsigned int>(time(nullptr)));
@@ -35,9 +35,18 @@ Commander::~Commander()
 	}
 }
 
+// 백그라운드에서 주기적으로 자원을 캐는 스레드 함수
 void Commander::AutoMiningWorker()
 {
+	while (m_bAutoMining)
+	{
+		this_thread::sleep_for(chrono::seconds(3)); // 3초 대기
 
+		// 여러 스레드가 동시에 자원 변수에 접근하는 것을 방지 (Thread-safe)
+		lock_guard<mutex> lock(m_ResourceMutex);
+		nResources += n_UP_Resources;
+		// cout << "\n[시스템] 미네랄이 " << n_UP_Resources << "만큼 채취되었습니다. (현재 자원: " << nResources << ")" << endl;
+	}
 }
 
 void Commander::Command()
@@ -146,38 +155,3 @@ void Commander::Display()
 	cout << "========================" << endl;
 }
 
-void GamePlay()
-{
-	Commander commander;
-	int nChoice;
-
-	while (true) {
-		commander.Command();
-		cin >> nChoice;
-
-		switch (nChoice)
-		{
-			case 1:
-				commander.Paming();
-			break;
-			case 2:
-				commander.Upgrade();
-			break;
-			case 3:
-				commander.PartyFull();
-			break;
-			case 4:
-				commander.Battle();
-			break;
-			case 5:
-				commander.Display();
-			break;
-			default:
-				cout << "잘못된 입력입니다. 다시 선택해주세요." << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			break;
-		}
-	}
-	
-}
