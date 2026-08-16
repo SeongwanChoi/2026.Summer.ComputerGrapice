@@ -18,7 +18,7 @@ Commander::Commander(int re, int ndm, int edm, int vdm, int ar, int sar, int bar
 		m_bAutoMining = true;
 		srand(static_cast<unsigned int>(time(nullptr)));
 
-		// 백그라운드 미네랄 채취 스레드 시작 (3초마다 미네랄 증가)
+		// 백그라운드 미네랄 채취 스레드 시작 
 		m_MiningThread = thread(&Commander::AutoMiningWorker, this);
 
 		cout << "반갑습니다 사령관님, 숫자를 눌러 명령을 내려주세요" << endl;
@@ -40,7 +40,7 @@ void Commander::AutoMiningWorker()
 {
 	while (m_bAutoMining)
 	{
-		this_thread::sleep_for(chrono::seconds(3)); // 3초 대기
+		this_thread::sleep_for(chrono::seconds(1)); // 1초마다 미네랄 증가
 
 		// 여러 스레드가 동시에 자원 변수에 접근하는 것을 방지 (Thread-safe)
 		lock_guard<mutex> lock(m_ResourceMutex);
@@ -52,7 +52,7 @@ void Commander::AutoMiningWorker()
 void Commander::Command()
 {
 	cout << "========================" << endl;
-	cout << "1. 자원채취		";
+	cout << "1. 자원 확인		";
 	cout << "2. 업그레이드		";
 	cout << "3. 병력증원" << endl;
 	cout << "4. 전장으로		";
@@ -62,9 +62,11 @@ void Commander::Command()
 
 void Commander::Paming()
 {
-	cout << "미네랄을 획득했습니다." << endl;
-	nResources += n_UP_Resources;
+	cout << "========================" << endl;
+	cout << endl;
 	cout << "현재 자원 : " << nResources << endl;
+	cout << endl;
+	cout << "========================" << endl;
 }
 
 void Commander::Upgrade()
