@@ -1,10 +1,15 @@
 #pragma once
 #include <thread>
 #include <mutex>
+#include <vector>
 
 using namespace std;
 
-class Commander;
+struct Unit {
+	string name;
+	int hp;
+	int damage;
+};
 
 class Commander
 { 
@@ -19,7 +24,8 @@ class Commander
 	int n_Small_Armor;	//  소형 방어력
 	int n_Big_Armor;	//	대형 방어력
 
-	
+	vector<Unit> m_Army; // 병력을 담을 연결리스트
+
 	bool m_bAutoMining; // 자동 자원 채취 트리거
 	thread m_MiningThread;
 	mutex m_ResourceMutex; // 자원 동기화용 뮤텍스

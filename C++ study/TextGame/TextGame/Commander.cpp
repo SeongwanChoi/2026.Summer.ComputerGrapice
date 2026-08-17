@@ -122,18 +122,51 @@ void Commander::Upgrade()
 
 void Commander::PartyFull()
 {
-	int Combat = 0;
+	int unitChoice = 0;
+	bool g_bTraining = true;
 
-	while (true)
+	while (g_bTraining)
 	{
-		switch (Combat)
+		cout << "\n--- 병력 증원 센터 (현재 미네랄: " << nResources << ") ---" << endl;
+		cout << "1. 마린 생산 (50원) - HP: 40, ATK: " << n_Normal_Damage << endl;
+		cout << "2. 파이어뱃 생산 (80원) - HP: 50, ATK: " << n_Normal_Damage + 5 << endl;
+		cout << "3. 나가기" << endl;
+		cout << "선택: ";
+		cin >> unitChoice;
+
+		switch (unitChoice)
 		{
-		case 1:
+		case 1: // 마린 생산
+		{
+			lock_guard<mutex> lock(m_ResourceMutex);
+			if (nResources >= 50) {
+				nResources -= 50;
+				m_Army.push_back({ "마린", 40, n_Normal_Damage });
+				cout << "마린이 생산되었습니다." << endl;
+			}
+			else {
+				cout << "미네랄이 부족합니다!" << endl;
+			}
+			break;
+		}
+		case 2: // 파이어뱃 생산
+		{
+			lock_guard<mutex> lock(m_ResourceMutex);
+			if (nResources >= 80) {
+				nResources -= 80;
+				m_Army.push_back({ "파이어뱃", 50, n_Normal_Damage + 5 });
+				cout << "파이어뱃이 생산되었습니다." << endl;
+			}
+			else {
+				cout << "미네랄이 부족합니다!" << endl;
+			}
+			break;
+		}
+		case 3:
+			g_bTraining = false;
 			break;
 		default:
-			cout << "다시 입력해주세요. " << endl;
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 선택입니다." << endl;
 			break;
 		}
 	}
