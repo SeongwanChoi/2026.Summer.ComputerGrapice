@@ -5,15 +5,12 @@
 
 using namespace std;
 
-Commander::Commander(int re, int ndm, int edm, int vdm, int ar, int sar, int bar, int cp)
+Commander::Commander(int re, int ndm, int ar)
 {
 		nResources = re;
-		n_Normal_Damage = ndm;
-		n_Explosion_Damage = edm;
-		n_Vibration_Damage = vdm;
+		n_Damage = ndm;
 		n_Armor = ar;
-		n_Small_Armor = sar;
-		n_Big_Armor = bar;
+
 
 		m_bAutoMining = true;
 		srand(static_cast<unsigned int>(time(nullptr)));
@@ -22,7 +19,6 @@ Commander::Commander(int re, int ndm, int edm, int vdm, int ar, int sar, int bar
 		m_MiningThread = thread(&Commander::AutoMiningWorker, this);
 
 		cout << "반갑습니다 사령관님, 숫자를 눌러 명령을 내려주세요" << endl;
-		Display();
 }
 
 Commander::~Commander()
@@ -77,12 +73,9 @@ void Commander::Upgrade()
 	while (g_bUpgrade)
 	{
 		cout << "1. 획득 미네랄 + 1 " << endl;
-		cout << "2. 폭발 공격 강화" << endl;
-		cout << "3. 진동 공격 강화" << endl;
-		cout << "4. 장갑 강화" << endl;
-		cout << "5. 소형 장갑 강화" << endl;
-		cout << "6. 대형 장갑 강화" << endl;
-		cout << "7. 나가기" << endl;
+		cout << "2. 공격 강화" << endl;
+		cout << "3. 장갑 강화" << endl;
+		cout << "4. 나가기" << endl;
 		cin >> Upgrade;
 
 		switch (Upgrade)
@@ -91,23 +84,12 @@ void Commander::Upgrade()
 				n_UP_Resources++;
 				break;
 			case 2:
-				n_Normal_Damage += 10;
-				n_Explosion_Damage += 10;
+				n_Damage ++;
 				break;
 			case 3:
-				n_Normal_Damage += 10;
-				n_Vibration_Damage += 10;
+				n_Armor ++;
 				break;
 			case 4:
-				n_Armor += 10;
-				break;
-			case 5:
-				n_Small_Armor += 10;
-				break;
-			case 6:
-				n_Big_Armor += 10;
-				break;
-			case 7:
 				g_bUpgrade = 0;
 				break;
 			default:
@@ -128,11 +110,19 @@ void Commander::PartyFull()
 	while (g_bTraining)
 	{
 		cout << "\n--- 병력 증원 센터 (현재 미네랄: " << nResources << ") ---" << endl;
-		cout << "1. 마린 생산 (50원) - HP: 40, ATK: " << n_Normal_Damage << endl;
-		cout << "2. 파이어뱃 생산 (80원) - HP: 50, ATK: " << n_Normal_Damage + 5 << endl;
+		cout << "1. 마린 생산 (50원) - HP: 40, ATK: " << n_Damage << endl;
+		cout << "2. 파이어뱃 생산 (80원) - HP: 50, ATK: " << n_Damage + 5 << endl;
 		cout << "3. 나가기" << endl;
 		cout << "선택: ";
 		cin >> unitChoice;
+
+		// 문자 입력 등으로 인한 무한 루프 방지 처리 추가
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "숫자로 올바르게 입력해주세요." << endl;
+			continue;
+		}
 
 		switch (unitChoice)
 		{
@@ -141,7 +131,7 @@ void Commander::PartyFull()
 			lock_guard<mutex> lock(m_ResourceMutex);
 			if (nResources >= 50) {
 				nResources -= 50;
-				m_Army.push_back({ "마린", 40, n_Normal_Damage });
+				m_Army.push_back({ "마린", 40, n_Damage });
 				cout << "마린이 생산되었습니다." << endl;
 			}
 			else {
@@ -154,7 +144,7 @@ void Commander::PartyFull()
 			lock_guard<mutex> lock(m_ResourceMutex);
 			if (nResources >= 80) {
 				nResources -= 80;
-				m_Army.push_back({ "파이어뱃", 50, n_Normal_Damage + 5 });
+				m_Army.push_back({ "파이어뱃", 50, n_Damage + 5 });
 				cout << "파이어뱃이 생산되었습니다." << endl;
 			}
 			else {
@@ -180,13 +170,7 @@ void Commander::Battle()
 void Commander::Display()
 {
 	cout << "========================" << endl;
-	cout << "자원: " << nResources << endl;
-	cout << "일반 공격력: " << n_Normal_Damage << endl;
-	cout << "폭발 공격력: " << n_Explosion_Damage << endl;
-	cout << "진동 공격력: " << n_Vibration_Damage << endl;
-	cout << "방어력: " << n_Armor << endl;
-	cout << "소형 방어력: " << n_Small_Armor << endl;
-	cout << "대형 방어력: " << n_Big_Armor << endl;
+
 	cout << "========================" << endl;
 }
 
