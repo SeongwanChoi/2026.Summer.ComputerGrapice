@@ -1,0 +1,5 @@
+Effect_ID,Type,Target,Value,Description
+1,HP_RECOVER,SELF,50,Recover 50 HP
+2,MP_RECOVER,SELF,50,Recover 50 MP
+3,DAMAGE_PHYSICAL,TARGET,20,Physical Damage 20
+4,DAMAGE_PHYSICAL,TARGET,10,Physical Damage 10

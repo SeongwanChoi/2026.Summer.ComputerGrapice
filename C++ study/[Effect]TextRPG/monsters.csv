@@ -1,0 +1,5 @@
+id,name,hp,def,atk,exp
+0,Slime,20,5,5,100
+1,Skeleton,100,10,10,250
+2,Zombie,120,15,15,400
+3,Dragon,200,20,20,1000

@@ -1,0 +1,19 @@
+다이렉트x9 다운로드:
+https://www.microsoft.com/en-us/download/confirmation.aspx?id=6812
+다이렉트x9 설치오류 해결:
+http://www.sysnet.pe.kr/Default.aspx?mode=2&sub=0&detail=1&pageno=0&wid=1195&rssMode=1&wtype=0
+다이렉트 x9 vs에 연동하기
+http://crui.tistory.com/entry/Direct-X-90-SDK-%EC%84%A4%EC%B9%98%ED%95%98%EA%B3%A0-Visual-Studio-2010-%EC%97%90%EC%84%9C-%EC%85%8B%ED%8C%85%ED%95%98%EA%B8%B0
+
+프로젝트생성
+Win32>빈프로젝트
+속성>구성속성>일반>문자집합>멀티바이트
+
+다이렉트x설치경로
+프로젝트설정>VC++디렉토리
+포함 디렉토리
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include
+라이브러리 디렉토리
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86
+링커>입력>추가속성
+winmm.lib;d3dx9d.lib;d3d9.lib;

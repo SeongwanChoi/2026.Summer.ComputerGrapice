@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CGameManager">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CGameManager::MONSTER" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="CGameManager::PLACE_TYPE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAAAAJAiAAAAAgAAAAgACAAgiAAAIAEA=</HashCode>
+      <FileName>GameManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CItem">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CItem::EITEMKIND" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Player.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAABAAAAAAAAAEAAAABgAAAQAAQAA=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemManager">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAEAAAAAAEAAAgAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterManager">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAIAIAAAACAAAAAEAAAAgAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>MonsterManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPlayer">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAgFUAAAAACSAAAgIAEREAgIIgQpAACAEgjBABxAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSkill">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CSkill::ESKILLKIND" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Skill.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAgAAAAAAAAAAAEAAAAAAACAIAAQAA=</HashCode>
+      <FileName>Skill.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillManager">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAACAAQAAEAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Skill.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SStat">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAgQAAAAAAAAAAgABiAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
