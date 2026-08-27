@@ -148,8 +148,6 @@ VOID SetupMatrices()
 {
     /// 월드행렬
     D3DXMATRIXA16 matWorld;
-
-
     UINT  iTime = timeGetTime() % 1000;					/// float연산의 정밀도를 위해서 1000으로 나머지 연산한다.
     FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f;		/// 1000밀리초마다 한바퀴씩(2 * pi) 회전 애니메이션 행렬을 만든다.
     D3DXMatrixRotationY(&matWorld, fAngle);				/// Y축을 회전행렬 생성
