@@ -1,0 +1,12 @@
+변수 : 
+상수 : 
+포인터 : 
+참조자 : 
+주소값 : 
+동적 할당 : 
+정적 할당 : 
+널 문자 : 
+
+값에 의한 호출 (Call by Value) : 
+포인터에 의한 호출 (Call by Pointer) : 
+참조에 의한 호출 (Call by Reference) : 

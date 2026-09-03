@@ -1,0 +1,5 @@
+Item_ID,Name,Item_Kind,Price,Effect_IDs
+1,Healing Potion,CONSUMABLE,100,1
+2,Mana Potion,CONSUMABLE,100,2
+3,Stone,CONSUMABLE,50,3
+4,Bomb,CONSUMABLE,150,4

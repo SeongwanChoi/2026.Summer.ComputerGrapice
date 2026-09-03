@@ -1,9 +1,10 @@
-﻿#include <iostream>//입출력라이브러리
+﻿#include <iostream>
 #include <time.h>
 #include <vector>
-#include <typeinfo> // typeid를 사용하기 위해 추가
+#include <typeinfo>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "Item.h"
 #include "Player.h"
 #include "MonsterManager.h"
@@ -11,16 +12,15 @@
 
 using namespace std;
 
-
-bool g_isExit = false; // 전역변수
+bool g_isExit = false;
 
 void PlayerAttackMonsterMain()
 {
 	cout << "PlayerAttackMonsterMainStart" << endl;
-	int nMonsterHP = 100; // 몬스터의 체력
-	int nPlayerAttack = 10; // 플레이어의 공격력
+	int nMonsterHP = 100;
+	int nPlayerAttack = 10;
 
-	cout << "몬스터의 체력: " << nMonsterHP << endl; //문장
+	cout << "몬스터의 체력: " << nMonsterHP << endl;
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 	nMonsterHP = nMonsterHP - nPlayerAttack;
 	cout << "몬스터의 체력: " << nMonsterHP << endl;
@@ -37,11 +37,11 @@ void PlayerCritcalAttackMonsterMain()
 	cout << "몬스터의 체력: " << nMonsterHP << endl;
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 
-	int nRandom = rand() % 4; //0~99까지 랜덤숫자
+	int nRandom = rand() % 4;
 	cout << "Random:" << nRandom << endl;
 	if (nRandom == 1)
 	{
-		cout << "크리키컬히트!" << endl;
+		cout << "크리티컬히트!" << endl;
 		nMonsterHP = nMonsterHP - (nPlayerAttack * 2);
 	}
 	else
@@ -57,7 +57,6 @@ void StageMain()
 	cout << "StageMainStart" << endl;
 	string strPlace;
 
-	// typeid를 이용한 객체 이름과 주소값 출력 예시
 	cout << "[TypeID Info] 객체 타입: " << typeid(strPlace).name()
 		<< ", 주소값: " << &strPlace << endl;
 
@@ -85,9 +84,9 @@ void CPPStageMain()
 	cout << "마을, 상점, 필드 중 가고 싶은 곳을 선택하시오." << endl;
 	cin >> strPlace;
 
-	arrPlace.push_back("마을"); // index 0
-	arrPlace.push_back("상점"); // index 1
-	arrPlace.push_back("필드"); // index 2
+	arrPlace.push_back("마을");
+	arrPlace.push_back("상점");
+	arrPlace.push_back("필드");
 
 	auto iter = find(arrPlace.begin(), arrPlace.end(), strPlace);
 
@@ -101,19 +100,19 @@ void CPPStageMain()
 	switch (nIdx)
 	{
 	case 0:
-		cout << "✨ [마을]에 입장했습니다. 안전한 곳입니다." << endl;
+		cout << "[마을]에 입장했습니다. 안전한 곳입니다." << endl;
 		break;
 
 	case 1:
-		cout << "🛒 [상점]에 입장했습니다. 아이템을 구매할 수 있습니다." << endl;
+		cout << "[상점]에 입장했습니다. 아이템을 구매할 수 있습니다." << endl;
 		break;
 
 	case 2:
-		cout << "⚔️ [필드]에 입장했습니다. 몬스터와 전투가 시작됩니다!" << endl;
+		cout << "[필드]에 입장했습니다. 몬스터와 전투가 시작됩니다!" << endl;
 		break;
 
 	default:
-		cout << "❌ 잘못된 입력입니다. '마을', '상점', '필드' 중 정확히 입력해주세요." << endl;
+		cout << "잘못된 입력입니다. '마을', '상점', '필드' 중 정확히 입력해주세요." << endl;
 		break;
 	}
 	cout << "CPPStageMainEnd" << endl;
@@ -122,9 +121,9 @@ void CPPStageMain()
 void PlayerAttackMonsterWhileMain()
 {
 	cout << "PlayerAttackMonsterWhileMainStart" << endl;
-	int nMonsterHP = 100; // 몬스터의 체력
-	int nPlayerAttack = 10; // 플레이어의 공격력
-	cout << "몬스터의 체력: " << nMonsterHP << endl; //문장
+	int nMonsterHP = 100;
+	int nPlayerAttack = 10;
+	cout << "몬스터의 체력: " << nMonsterHP << endl;
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 
 	while (nMonsterHP != 0)
@@ -151,7 +150,7 @@ void MonsterListMain()
 	cout << "listMonster[0]:" << listMonster[0] << endl;
 	cout << "listMonster[3]:" << listMonster[3] << endl;
 
-	for (int i = 0; i < listMonster.size(); i++)
+	for (size_t i = 0; i < listMonster.size(); i++)
 	{
 		cout << i << ":" << listMonster[i] << ",";
 	}
@@ -162,14 +161,14 @@ void MonsterListMain()
 void BattleMain()
 {
 	cout << "BattleMainStart" << endl;
-	int nPlayerAttack = 20; // 플레이어의 공격력
+	int nPlayerAttack = 20;
 	int nPlayerHP = 40;
-	cout << "플레이어의 체력: " << nPlayerAttack << endl; //문장
+	cout << "플레이어의 체력: " << nPlayerAttack << endl;
 	cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 
 	int nMonsterAttack = 20;
-	int nMonsterHP = 40; // 몬스터의 체력
-	cout << "몬스터의 체력: " << nMonsterHP << endl; //문장
+	int nMonsterHP = 40;
+	cout << "몬스터의 체력: " << nMonsterHP << endl;
 	cout << "몬스터의 공격력: " << nMonsterAttack << endl;
 
 	while (nMonsterHP > 0 && nPlayerHP > 0)
@@ -182,7 +181,7 @@ void BattleMain()
 		{
 			cout << "플레이어의 공격!" << endl;
 			nMonsterHP = nMonsterHP - nPlayerAttack;
-			cout << "몬스터의 체력: " << nMonsterHP << endl; //문장
+			cout << "몬스터의 체력: " << nMonsterHP << endl;
 			cout << "몬스터의 공격력: " << nMonsterAttack << endl;
 		}
 
@@ -194,7 +193,7 @@ void BattleMain()
 		{
 			cout << "몬스터의 공격!" << endl;
 			nPlayerHP = nPlayerHP - nMonsterAttack;
-			cout << "플레이어의 체력: " << nPlayerAttack << endl; //문장
+			cout << "플레이어의 체력: " << nPlayerAttack << endl;
 			cout << "플레이어의 공격력: " << nPlayerAttack << endl;
 		}
 	}
@@ -246,26 +245,52 @@ bool PlayerBattileMain(CPlayer& cPlayer, CPlayer cMonster)
 	return false;
 }
 
-
-bool PlayerBattileMainPtr(CPlayer * pPlayer, CPlayer * pMonster)
+bool PlayerBattileMainPtr(CPlayer* pPlayer, CPlayer* pMonster)
 {
 	cout << "PlayerBattileMainStart" << endl;
 	cout << "[TypeID Info] pPlayer 타입: " << typeid(pPlayer).name() << ", 주소값: " << &pPlayer << endl;
 	cout << "[TypeID Info] pMonster 타입: " << typeid(pMonster).name() << ", 주소값: " << &pMonster << endl;
 
-	cout << "\n⚔️ [" << pMonster->GetName() << "]을(를) 조우했습니다!" << endl;
+	cout << "\n[" << pMonster->GetName() << "]을(를) 조우했습니다!" << endl;
+
+	int nMode = 0;
+	cout << "\n================ [ 전투 모드 선택 ] ================" << endl;
+	cout << "1. 수동 전투 (매뉴얼)" << endl;
+	cout << "2. 자동 전투 (평타 전용)" << endl;
+	cout << "모드를 선택하세요: ";
+	cin >> nMode;
+
+	bool isAutoBattle = (nMode == 2);
+
+	if (isAutoBattle)
+	{
+		cout << "\n[자동 전투 시작] 전투가 종료될 때까지 평타 공격을 시전합니다!" << endl;
+	}
+	else
+	{
+		cout << "\n[수동 전투 시작] 직접 행동을 선택합니다." << endl;
+	}
 
 	while (!pPlayer->Dead() && !pMonster->Dead())
 	{
 		// ------------------ 플레이어 턴 ------------------
 		cout << "\n================ [ 전투 메뉴 ] ================" << endl;
 		cout << "플레이어 HP: " << pPlayer->GetHp() << " | 몬스터 HP: " << pMonster->GetHp() << endl;
-		cout << "1. 일반 공격" << endl;
-		cout << "2. 아이템 사용" << endl;
-		cout << "행동을 선택하세요: ";
 
 		int nAction = 0;
-		cin >> nAction;
+
+		if (!isAutoBattle)
+		{
+			cout << "1. 일반 공격" << endl;
+			cout << "2. 아이템 사용" << endl;
+			cout << "행동을 선택하세요: ";
+			cin >> nAction;
+		}
+		else
+		{
+			cout << "[자동 전투 진행 중] 평타 공격!" << endl;
+			nAction = 1;
+		}
 
 		if (nAction == 1)
 		{
@@ -273,19 +298,15 @@ bool PlayerBattileMainPtr(CPlayer * pPlayer, CPlayer * pMonster)
 		}
 		else if (nAction == 2)
 		{
-			// 1. 메인에서 출력 함수 호출
 			pPlayer->ShowInventory();
 
-			// 2. 메인에서 입력 처리
 			cout << "사용할 아이템 번호 입력: ";
 			int nIdx;
 			cin >> nIdx;
 
-			// 3. 메인에서 로직 함수 호출
 			if (!pPlayer->UseItem(nIdx, pMonster)) {
 				cout << "사용 실패!" << endl;
 			}
-			// 아이템 사용 성공 시 여기서 턴 종료(바로 아래 몬스터 턴으로 이동)
 		}
 		else
 		{
@@ -293,7 +314,7 @@ bool PlayerBattileMainPtr(CPlayer * pPlayer, CPlayer * pMonster)
 			continue;
 		}
 
-		// 몬스터 사망 체크 (플레이어 공격/아이템 사용 직후)
+		// 몬스터 사망 체크
 		if (pMonster->Dead())
 		{
 			cout << "\n" << pPlayer->GetName() << " 승리! (" << pMonster->GetName() << " 처치)" << endl;
@@ -321,7 +342,7 @@ bool PlayerBattileMainPtr(CPlayer * pPlayer, CPlayer * pMonster)
 
 		if (pPlayer->Dead())
 		{
-			cout << pPlayer->GetName() << " 이(가) 사망했습니다..." << endl;
+			cout << "\n" << pPlayer->GetName() << " 이(가) 사망했습니다..." << endl;
 			cout << "Battle End !!!\n" << endl;
 			if (pMonster) delete pMonster;
 			return true;
@@ -344,24 +365,50 @@ void PlayerGameMain()
 	gameManager.Init();
 	gameManager.InitTest();
 
-	int nChoice = 0;
-
 	while (!g_isExit)
 	{
 		gameManager.Update();
+
+		if (gameManager.IsExit())
+		{
+			g_isExit = true;
+		}
 	}
 
-	cout << "\nGAME OVER!!!" << endl;
+	cout << "\n====================================" << endl;
+	cout << "            GAME OVER" << endl;
+	cout << "    플레이어가 사망하여 게임을 종료합니다." << endl;
+	cout << "====================================" << endl;
 	cout << "PlayerGameMainEnd" << endl;
 }
 
+// 2. 델리게이트 방식 이펙트 관리자를 실행하는 게임 함수
+void RunDelegateGame()
+{
+	cout << "\n==========================================" << endl;
+	cout << "   2. 델리게이트/함수포인터 기반 게임 모드 실행" << endl;
+	cout << "==========================================" << endl;
 
+	CGameManager gameMgr;
+	gameMgr.InitDelegate(); // DelegateEffectManager 사용
+	gameMgr.InitTest();
+
+	while (!gameMgr.IsExit())
+	{
+		gameMgr.Update();
+	}
+}
+
+// ==========================================
+// 델리게이트 이펙트 관리자를 활용하는 게임 루프 함수
+// ==========================================
 
 int main()
 {
 	cout << "mainStart" << endl;
 	srand(static_cast<unsigned int>(time(NULL)));
-	PlayerGameMain();
+	//PlayerGameMain();
+	RunDelegateGame();
 	cout << "mainEnd" << endl;
 	return 0;
 }

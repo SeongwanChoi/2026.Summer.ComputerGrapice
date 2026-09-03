@@ -1,0 +1,5 @@
+Skill_ID,Name,MP_Cost,Skill_Kind,Effect_IDs
+1,Heal,10,ACTIVE,1
+2,Meditation,0,ACTIVE,2
+3,Smash,20,ACTIVE,3
+4,Slam,30,ACTIVE,4
